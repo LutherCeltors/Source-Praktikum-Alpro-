@@ -1,44 +1,29 @@
 #include <stdio.h>
 
-int main(){
-    /*Kamus*/
-    int N, i, j, k, l, m;
-
-    /*Algoritma*/
+int main() {
+    int N;
     scanf("%d", &N);
-    /*Validasi*/
-    if ((N % 2)== 0){
-        printf("Input tidak valid !");
-    }else{
-        /*inisiasi*/
-        k = 0;
-        l = 0;
-        m = 0;
-        for (i=1; i<=N;++i){
-            for (j=1; j<=N;++j){
-                if (j == ((N+1)/2) && i == 1 && l == 0){
-                    k = j;
-                    printf("*");
-                }else if((j == k || j == (k + ((j-1)*2))) && l == 0){
-                    printf("*");
-                }else if(k == 1){
-                    k = 0;
-                    l = 1;
-                    m = ((j-1)*2);
-                }else if (j == l || j == l + m){
-                    printf("*");
-                }else if (i == N){
-                    if (j == ((N+1)/2)){
-                        printf("*");
-                    }
-                }else{
-                    printf(".");
-                }
-            }
-            printf("\n");
-            k = k - 1;
-            l = l + 1;
-            m = m - 2;
-        }
+
+    if (N < 1 || N > 25 || N % 2 == 0) {
+        return 0;
     }
+    int mid = N / 2; 
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {     
+            int distance;
+            if (i <= mid) {
+                distance = i; 
+            } else {
+                distance = N - 1 - i; 
+            }          
+            if (j == mid - distance || j == mid + distance) {
+                printf("*");
+            } else {
+                printf(".");
+            }
+        }
+        printf("\n"); 
+    }
+
+    return 0;
 }
