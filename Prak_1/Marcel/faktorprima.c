@@ -1,47 +1,27 @@
 #include <stdio.h>
 
-int main(){
-    int n, i, count, ilama;
-
-    scanf("%d", &n);
-    i = 2;
-    count = 0;
-    ilama = 0;
-    while (n>1){
-        if (n%i == 0){
-            // printf("-%d-\n", i);
+int main () {
+    int b, i, count;
+    scanf("%d", &b);
+    for (i=2;i<=b;i++) {
+        count = 0;
+        while (b % i == 0) {
+            b /= i;
             count += 1;
-            n /= i;
-            // printf("-%d-\n", n);
-            if (count > 1){
-                /*bandingkan dengan yg lama*/   
-                if (ilama != i){
-                    count -= 1;
-                    if (n==1){
-                        if (count == 1){
-                            printf("%d * %d", ilama, i);
-                        }else{
-                            printf("%d^%d ", ilama, count);
-                            printf("* %d", i);
-                        }
-                    }else{
-                        if (count == 1){
-                            printf("%d *", ilama);
-                        }else{
-                            printf("%d^%d *", ilama, count);
-                            count = 1;
-                        }
-                    }
-                }else if (ilama == i && n==1){
-                    printf("sss%d^%d", i, count);
+            if (b % i != 0) {
+                if (count == 1) {
+                    printf("%d", i);
                 }
-            }
-            ilama = i;
+                else if (count != 1) {
+                    printf("%d^%d", i, count);
+                }
+                if (b != 1) {
+                    printf(" * ");
+                }
 
-        }else{
-            i += 1;
-        }
+            }
+
+        }        
     }
     printf("\n");
-    return 0;
 }

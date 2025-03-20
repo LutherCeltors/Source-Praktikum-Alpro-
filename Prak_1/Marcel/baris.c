@@ -24,7 +24,10 @@ int main() {
                 }
                 x = x + add;
             }
-            printf(" ");
+            if (j!=N-1){
+                printf(" ");
+            }
+            
         }
         
         printf("\n");
