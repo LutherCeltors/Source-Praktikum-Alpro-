@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-long long int kombinasi (int a, int b);
+long long kombinasi (int a, int b);
 
 int main(){
     int i, j, n, sp;
-    long long int k;
+    long long k;
     int spasi;
 
     scanf("%d", &n);
@@ -15,35 +15,23 @@ int main(){
         }
         for (j=0;j<=i;j++){
             k = kombinasi(i,j);
-            printf("%lld ", k);
+            printf("%lld", k);
+            if (j != i){
+                printf(" ");
+            }
         }
         printf("\n");
     }
 }
 
-long long int kombinasi (int a, int b){
-    long long int k1, k2, k3, i;
-    k1 = 1;
-    k2 = 1;
-    k3 = 1;
-    for (i = a; i >=1; i--){
-        k1 *= i; 
-        if (i==0){
-            k1 = 1;
-        }
-    }
-    for (i = b; i >=1; i--){
-        k2 *= i;
-        if (i==0){
-            k2 = 1;
-        } 
-    }
-    for (i = (a-b); i >=1; i--){
-        k3 *= i; 
-        if (i==0){
-            k3 = 1;
-        }
-    }
-    return k1/(k2*k3);
+long long kombinasi(int a, int b) {
+    if (b == 0 || b == a) return 1;
     
+    long long hasil = 1;
+    if (b > a - b) b = a - b;  // C(n, k) = C(n, n-k) -> lebih efisien
+
+    for (int i = 0; i < b; i++) {
+        hasil = hasil * (a - i) / (i + 1);  // Hitung tanpa faktorial besar
+    }
+    return hasil;
 }
