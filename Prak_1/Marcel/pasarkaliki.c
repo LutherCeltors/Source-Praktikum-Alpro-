@@ -9,7 +9,7 @@ int main(){
 
     scanf("%d", &n);
     for (i=0;i<n;i++){
-        spasi = (n-1)-i;
+        spasi = (n-2)-i;
         for (sp=spasi;sp>=0;sp--){
             printf(" ");
         }
