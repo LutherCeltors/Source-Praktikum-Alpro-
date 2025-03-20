@@ -33,7 +33,7 @@ int main(){
                         }
                     }
                 }else if (ilama == i && n==1){
-                    printf(" %d^%d", i, count);
+                    printf("sss%d^%d", i, count);
                 }
             }
             ilama = i;
@@ -42,6 +42,6 @@ int main(){
             i += 1;
         }
     }
+    printf("\n");
+    return 0;
 }
-
-
