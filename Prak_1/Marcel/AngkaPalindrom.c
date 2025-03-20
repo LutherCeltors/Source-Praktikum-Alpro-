@@ -13,9 +13,9 @@ int main(){
         n = n/10;   
     }
     if (angka == reverse){
-        printf("Palindrom");
+        printf("1");
     }else{
-        printf("Bukan Palindrom");
+        printf("0");
     }
     return 0;
 }
