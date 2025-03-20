@@ -19,21 +19,21 @@ int main(){
                     count -= 1;
                     if (n==1){
                         if (count == 1){
-                            printf("%d*%d", ilama, i);
+                            printf("%d * %d", ilama, i);
                         }else{
-                            printf("%d^%d", ilama, count);
-                            printf("*%d", i);
+                            printf("%d^%d ", ilama, count);
+                            printf("* %d", i);
                         }
                     }else{
                         if (count == 1){
-                            printf("%d*", ilama);
+                            printf("%d *", ilama);
                         }else{
-                            printf("%d^%d*", ilama, count);
+                            printf("%d^%d *", ilama, count);
                             count = 1;
                         }
                     }
                 }else if (ilama == i && n==1){
-                    printf("%d^%d", i, count);
+                    printf(" %d^%d", i, count);
                 }
             }
             ilama = i;
