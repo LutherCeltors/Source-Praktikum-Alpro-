@@ -1,2 +1,4 @@
-            // printf("%d\n", prime);
-            // printf("%d\n", hb);
+for (j=0; j>= i; j++){
+        //     // k = kombinasi(i,j);
+        //     printf("%d, %d", i,j);
+        // }
