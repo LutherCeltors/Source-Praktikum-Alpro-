@@ -1,0 +1,2 @@
+Inisiasi folder untuk praktikum 2
+*Biar di git bisa langsung kelihatan.
