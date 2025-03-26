@@ -12,7 +12,7 @@ int main() {
         x = init;
         add = i;
         
-        for (int j = 0; j < N; j = j + 1) {
+        for (int j = 0; j < N; j++) {
             if (j < N - i - 1) {
                 printf("%d", x);
                 add = add + 1;
@@ -24,7 +24,7 @@ int main() {
                 }
                 x = x + add;
             }
-            if (j!=N-1){
+            if (j!= N-1){
                 printf(" ");
             }
             
