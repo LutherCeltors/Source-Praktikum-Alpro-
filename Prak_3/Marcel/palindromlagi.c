@@ -15,13 +15,15 @@ int main(){
     even = 0; odd = 0;
     for (int i = 0; i<len; i++){
         if (samp != s[i]) samp = s[i];
-        else i += 1;
+        else {
+            continue;
+        }
         // printf("%c", samp);
         count = 0;
         for (int j = 0; j<len; j++){
             if (samp == s[j]) count += 1;
         }
-        // printf("%d\n", count);
+        // printf("%d\n",count);
         if (count%2 == 0) even += 1;
         else odd += 1;
         sumchar += count;
