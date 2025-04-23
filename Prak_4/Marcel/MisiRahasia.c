@@ -13,7 +13,8 @@ int main() {
         int mval;
     }Miss;
     Miss arr[1000];
-    int neff, Pass, Tukar, temp;
+    Miss temp;
+    int neff, Pass, Tukar;
     int tindex, ix;
     /* Tulis kode dibawa ini */
     fin = fopen("input.txt", "r");
@@ -28,53 +29,38 @@ int main() {
         fscanf(fin, "%d %d %d", &ID, &Succ, &mVal);
         neff += 1;
     }
-    //sort prioritas 1
-    Pass = 1;
-    Tukar = 1;
-    while (Pass <= neff-1  && Tukar){
-        Tukar = 0;
-        for (int i = neff; i>=Pass+1; i--){
-            if (arr[i].succ < arr[i-1].succ){
-                temp = arr[i].succ;
-                arr[i].succ = arr[i+1].succ;
-                arr[i+1].succ = temp;
-                Tukar = 1;
+ 
+    // Prioritas 1: Success (descending)
+    for (int i = 0; i < neff - 1; i++) {
+        for (int j = 0; j < neff - i - 1; j++) {
+            if (arr[j].succ > arr[j+1].succ) {
+                temp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = temp;
             }
-        }Pass += 1;
+        }
     }
-    //prioritas 2
-    Pass = 1;
-    Tukar = 1;
-    while (Pass <= neff-1  && Tukar){
-        Tukar = 0;
-        for (int i = neff; i>=Pass+1; i--){
-            if (arr[i].mval < arr[i-1].mval){
-                temp = arr[i].mval;
-                arr[i].mval = arr[i+1].mval;
-                arr[i+1].mval = temp;
-                Tukar = 1;
+
+    // Prioritas 2: Mission Value (descending)
+    for (int i = 0; i < neff - 1; i++) {
+        for (int j = 0; j < neff - i - 1; j++) {
+            if (arr[j].succ == arr[j+1].succ && arr[j].mval > arr[j+1].mval) {
+                temp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = temp;
             }
-        }Pass += 1;
+        }
     }
-    //prioritas 3
-    Pass = 1;
-    Tukar = 1;
-    while (Pass <= neff-1  && Tukar){
-        Tukar = 0;
-        for (int i = neff; i>=Pass+1; i--){
-            if (arr[i].id < arr[i-1].id && arr[i].succ == arr[i-1].succ && arr[i].mval == arr[i-1].mval){
-                temp = arr[i].id;
-                arr[i].id = arr[i+1].id;
-                arr[i+1].id = temp;
-                Tukar = 1;
+
+    // Prioritas 3: ID (descending)
+    for (int i = 0; i < neff - 1; i++) {
+        for (int j = 0; j < neff - i - 1; j++) {
+            if (arr[j].succ == arr[j+1].succ && arr[j].mval == arr[j+1].mval && arr[j].id > arr[j+1].id) {
+                temp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = temp;
             }
-        }Pass += 1;
+        }
     }
 
     fscanf(fquer, "%d", &tindex);
     for (int i = 0; i<tindex; i++){
         fscanf(fquer, "%d", &ix);
-        printf("%d %d\n", arr[ix].id, arr[ix].mval);
+        printf("%d %d\n", arr[ix-1].id, arr[ix-1].mval);
     }
 
     fclose(fin);
