@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "tester.h" 
+#include "tester.h" /*Jadikan komentar apabila ingin dijalankan*/
+
 int main () {
-    init(); 
+    init(); /*Jadikan komentar apabila ingin dijalankan*/
     FILE *fa, *fb;
     int a1,b1,a2,b2;
     fa = fopen("file_a.txt", "r");

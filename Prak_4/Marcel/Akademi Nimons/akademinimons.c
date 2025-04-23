@@ -99,7 +99,28 @@ typedef struct
  * @line: baris yang berisi data nimons
  * @nimon: pointer ke struktur Nimon untuk menyimpan hasil parsing
  */
-void parseStudentData(char *line, Nimon *nimon);
+void parseStudentData(char *line, Nimon *nimon) {
+  char *token;
+
+  // NIM
+  token = strtok(line, "|");
+  strcpy(nimon->nim, token);
+
+  // Nama
+  token = strtok(NULL, "|");
+  strcpy(nimon->name, token);
+
+  // Nilai
+  token = strtok(NULL, "\n");
+  nimon->scoreCount = 0;
+  char *score = strtok(token, ",");
+
+  while (score != NULL && nimon->scoreCount < MAX_SCORES) {
+      nimon->scores[nimon->scoreCount++] = atoi(score);
+      score = strtok(NULL, ",");
+  }
+}
+
 
 /**
  * Prosedur pembantu untuk menghitung statistik dari sebuah nimon
@@ -110,7 +131,22 @@ void parseStudentData(char *line, Nimon *nimon);
  *
  * @nimons: pointer ke struktur Nimon yang berisi data nimons
  */
-void calculateStatistics(Nimon *nimon);
+void calculateStatistics(Nimon *nimon) {
+  int sum = 0;
+  nimon->highest = nimon->scores[0];
+  nimon->lowest = nimon->scores[0];
+
+  for (int i = 0; i < nimon->scoreCount; i++) {
+      int val = nimon->scores[i];
+      sum += val;
+      if (val > nimon->highest) nimon->highest = val;
+      if (val < nimon->lowest) nimon->lowest = val;
+  }
+
+  nimon->average = sum / (float)nimon->scoreCount;
+  strcpy(nimon->status, (nimon->average >= PASS_THRESHOLD) ? "PASS" : "FAIL");
+}
+
 
 /**
  * Prosedur pembantu untuk menulis hasil nimons ke console dengan format:
@@ -125,7 +161,12 @@ void calculateStatistics(Nimon *nimon);
  * @nimon: pointer ke struktur Nimon yang berisi data nimons
  *
  */
-void writeStudentResult(Nimon *nimon);
+void writeStudentResult(Nimon *nimon) {
+  printf("%s|%s|%.2f|%d|%d|%s\n",
+         nimon->nim, nimon->name, nimon->average,
+         nimon->highest, nimon->lowest, nimon->status);
+}
+
 
 /**
  * Prosedur pembantu untuk menghitung dan menulis ringkasan statistik kelas dalam format:
@@ -142,7 +183,31 @@ void writeStudentResult(Nimon *nimon);
  * @nimons: array of Nimon structures
  * @nimonCount: jumlah nimons dalam array
  */
-void writeSummary(Nimon *nimons, int nimonCount);
+void writeSummary(Nimon *nimons, int nimonCount) {
+  int lulus = 0;
+  float maxAvg = 0.0;
+  int idxMax = 0;
+
+  for (int i = 0; i < nimonCount; i++) {
+      if (strcmp(nimons[i].status, "PASS") == 0)
+          lulus++;
+
+      if (nimons[i].average > maxAvg) {
+          maxAvg = nimons[i].average;
+          idxMax = i;
+      }
+  }
+
+  int gagal = nimonCount - lulus;
+  float persenLulus = 100.0 * lulus / nimonCount;
+  float persenGagal = 100.0 * gagal / nimonCount;
+
+  printf("%d\n", nimonCount);
+  printf("%d %.2f%%\n", lulus, persenLulus);
+  printf("%d %.2f%%\n", gagal, persenGagal);
+  printf("%s|%s|%.2f\n", nimons[idxMax].nim, nimons[idxMax].name, nimons[idxMax].average);
+}
+
 
 /**
  * Fungsi utama akan membaca file input, memproses data nimons,
@@ -153,4 +218,22 @@ void writeSummary(Nimon *nimons, int nimonCount);
  * @inputFileName: nama file input
  * @return 0 jika berhasil, 1 jika gagal (misalnya file tidak ditemukan)
  */
-int run(char *inputFileName);
+int run(char *inputFileName) {
+  FILE *fp = fopen(inputFileName, "r");
+  if (!fp) return 1;
+
+  Nimon nimons[MAX_NIMONS];
+  char line[MAX_LINE_LENGTH];
+  int nimonCount = 0;
+
+  while (fgets(line, sizeof(line), fp)) {
+      parseStudentData(line, &nimons[nimonCount]);
+      calculateStatistics(&nimons[nimonCount]);
+      writeStudentResult(&nimons[nimonCount]);
+      nimonCount++;
+  }
+
+  fclose(fp);
+  writeSummary(nimons, nimonCount);
+  return 0;
+}

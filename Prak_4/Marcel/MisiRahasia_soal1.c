@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tester.h"
+#include "tester.h" /*Jadikan komentar apabila ingin dijalankan*/
 
 /* Tulis kode disini jika perlu */
 
 int main() {
-    init();
+    init(); /*Jadikan komentar apabila ingin dijalankan*/
     FILE *f;
     int ID, Succes, mValue;
     int totMis, succMis, valMis;

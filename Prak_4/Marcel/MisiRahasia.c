@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tester.h"
+#include "tester.h" /*Jadikan komentar apabila ingin dijalankan*/
 
 
 int main() {
-    init();
+    init(); /*Jadikan komentar apabila ingin dijalankan*/
     FILE *fin, *fquer;
     int ID, Succ, mVal;
     typedef struct{
