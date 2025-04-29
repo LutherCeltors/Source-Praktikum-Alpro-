@@ -49,7 +49,7 @@ float *GetElement(Matrix *M, int row, int col)
 /* Mengembalikan pointer ke elemen matrix M pada baris row dan kolom col */
 /* Mengembalikan NULL jika row atau col tidak valid untuk matrix M */
 {
-    if ((M->rows) >= row && (M->cols) >= col && row >= 1 && col >= 1) return &M->data[row-1][col-1];
+    if ((M->rows) > row && (M->cols) > col && row >= 0 && col >= 0) return &M->data[row][col];
     else return NULL;
 }
 
@@ -60,8 +60,8 @@ bool SetElement(Matrix *M, int row, int col, float value)
 /*      Jika row atau col tidak valid, mengembalikan false */
 {
     bool status;
-    if ((M->rows) >= row && (M->cols) >= col && row >= 1 && col >= 1){
-        M->data[row-1][col-1] = value;
+    if ((M->rows) > row && (M->cols) > col && row >= 0 && col >= 0){
+        M->data[row][col] = value;
         status = true;
     }else status = false;
     return status;
@@ -164,22 +164,34 @@ Matrix *MultiplyMatrix(Matrix M1, Matrix M2)
 /* Mengembalikan NULL jika jumlah kolom M1 != jumlah baris M2 */
 /* Hint: Gunakan Matrix* pointer = (Matrix *)malloc(sizeof(Matrix)) untuk menghasilkan pointer ke Matrix baru */
 /* Jika anda membuat driver sendiri, jangan lupa di free ya -> free(pointer) */
-{   Matrix *pointer = (Matrix*)malloc(sizeof(Matrix));
-    float temp_val;
+{   
+    Matrix *pointer = (Matrix*)malloc(sizeof(Matrix));
+    
     int mcol, mrow;
     mcol = 0; mrow = 0;
-    pointer->data[mrow][mcol] = 0;
+    // pointer->data[mrow][mcol] = 0;
+    // if (M1.cols == M2.rows){
+    //     while (mrow < M2.cols && mcol < M1.rows){
+    //         for (int i = 0; i < M1.rows; i++){
+    //             mrow += 1;
+    //             for (int j = 0; j < M1.cols; j++){
+    //                 pointer->data[mrow][mcol] += M1.data[i][j]*M2.data[j][mcol];
+    //             }
+    //         }
+    //         mcol += 1;
+    //     }
+    // }
     if (M1.cols == M2.rows){
-        while (mrow < M2.cols && mcol < M1.rows){
-            for (int i = 0; i < M1.rows; i++){
-                mrow += 1;
-                for (int j = 0; j < M1.cols; j++){
-                    pointer->data[mrow][mcol] += M1.data[i][j]*M2.data[j][mcol];
+        CreateMatrix(M1.rows, M2.cols, pointer);
+        for (int irow_p = 0; irow_p < pointer->rows; irow_p++){
+            for (int icol_p = 0; icol_p < pointer->cols; icol_p++){
+                for (int ishr = 0; ishr < M1.cols; ishr++){
+                    pointer->data[irow_p][icol_p] += M1.data[irow_p][ishr]*M2.data[ishr][icol_p];
                 }
             }
-            mcol += 1;
         }
-    }
+        return pointer;
+    }else return NULL;
 }
 
 Matrix *AddMatrix(Matrix M1, Matrix M2)
@@ -241,7 +253,7 @@ Matrix GetTranspose(Matrix M)
     CreateMatrix(M.cols, M.rows, &Mt);
     for (int i = 0; i < M.rows; i++){
         for (int j = 0; j < M.cols; j++){
-            Mt.data[i][j] = M.data[j][i];     
+            Mt.data[j][i] = M.data[i][j];     
         }
     }
     return Mt;

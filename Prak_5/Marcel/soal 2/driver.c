@@ -14,15 +14,18 @@ int main() {
     PrintPolynomial(&p1);        // Expected: 3x^2 + 2x + 1
 
     printf("\n== Create p2 ==\n");
-    CreatePolynomial(&p2);
-    SetCoefficient(&p2, 0, -1);
-    SetCoefficient(&p2, 1, 0);
-    SetCoefficient(&p2, 2, 4);
-    SetCoefficient(&p2, 3, -2);
-    p2.degree = GetDegree(&p2);
+    // int ca[] = {0, 3, 2, 4};
+    // CreatePolynomialFromArray(&p2, ca, 4);
+
+    ReadPolynomial(&p2);
 
     printf("p2: ");
-    PrintPolynomial(&p2);        // Expected: -2x^3 + 4x^2 - 1
+    PrintPolynomial(&p2);        //4x^3 + 2x^2 - 3x
+
+    SetCoefficient(&p2, 3, 0);
+    PrintPolynomial(&p2);        // 2x^2 - 3x
+    printf("%d\n", GetDegree(&p2));
+    printf("%d coeff\n ", GetCoefficient(&p2, 2));
 
     printf("\n== Addition (p1 + p2) ==\n");
     AddPolynomials(&p1, &p2, &result);

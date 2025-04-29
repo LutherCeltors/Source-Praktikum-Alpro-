@@ -56,7 +56,7 @@ void BacaTIME (TIME * T)
     int HH, MM, SS;
     for (;;){
         scanf("%d %d %d", &HH, &MM, &SS);
-        if ((HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && SS >= 0 && SS <= 59))break;
+        if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && SS >= 0 && SS <= 59) break;
         else printf("Jam tidak valid\n");
     }
     CreateTime(T, HH, MM, SS);

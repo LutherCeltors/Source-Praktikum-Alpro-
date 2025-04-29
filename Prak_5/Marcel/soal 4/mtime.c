@@ -15,7 +15,7 @@ int main(){
         b = TIMEToDetik(t2);
         if (a >= b){
             printf("%ld\n", a-b);
-            if (i == 0){
+            if (i == 1){
                 tmin = t2;
                 tmax = t1;
             }else{
@@ -27,9 +27,9 @@ int main(){
             }
         }else{ /*a<b*/
             printf("%ld\n", b-a);
-            if (i == 0){
-                tmin = t2;
-                tmax = t1;
+            if (i == 1){
+                tmin = t1;
+                tmax = t2;
             }else{
                 if (TIMEToDetik(tmax)<TIMEToDetik(t2)){
                     tmax = t2;

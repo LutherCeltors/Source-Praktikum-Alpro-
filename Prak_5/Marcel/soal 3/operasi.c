@@ -41,6 +41,7 @@ Pasien MakePasien(char nama[], Vital v, Lokasi l){
     strcpy(p.nama, nama);
     p.l = l;
     p.v = v;
+    return p;
 }
 
 /* --- Aksesor --- */
@@ -134,7 +135,7 @@ void PindahPasien(Lokasi *l, int dx, int dy)
 /* --- Print --- */
 void PrintVital(Vital v)
 /* Format: "Tekanan: xxx mmHg, Detak: xxx bpm, Saturasi: xx.xx%" */{
-    printf("Tekanan: %d mmhg, Detak: %d bpm, Saturasi: %.2f%\n", v.tekananDarah, v.detakJantung, v.saturasiOksigen);
+    printf("Tekanan: %d mmhg, Detak: %d bpm, Saturasi: %.2f%%\n", v.tekananDarah, v.detakJantung, v.saturasiOksigen);
 }
 
 void PrintLokasi(Lokasi l)
@@ -150,7 +151,7 @@ void PrintPasien(Pasien p)
    Lokasi
 */
 {
-    printf("%s\n", p.nama);
+    printf("Nama: %s\n", p.nama);
     PrintVital(p.v);
     PrintLokasi(p.l);
 }
