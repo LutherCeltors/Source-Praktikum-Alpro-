@@ -178,6 +178,8 @@
   */
  {
     int i = 1;
+    p1->degree = GetDegree(p1);
+    p2->degree = GetDegree(p2);
     if(p1->degree == p2->degree){
         for (int i = 0; i <= p1->degree; i++){
             if (p1->coeff[i] != p2->coeff[i]){

@@ -135,7 +135,7 @@ void PindahPasien(Lokasi *l, int dx, int dy)
 /* --- Print --- */
 void PrintVital(Vital v)
 /* Format: "Tekanan: xxx mmHg, Detak: xxx bpm, Saturasi: xx.xx%" */{
-    printf("Tekanan: %d mmhg, Detak: %d bpm, Saturasi: %.2f%%\n", v.tekananDarah, v.detakJantung, v.saturasiOksigen);
+    printf("Tekanan: %d mmHg, Detak: %d bpm, Saturasi: %.2f%%\n", v.tekananDarah, v.detakJantung, v.saturasiOksigen);
 }
 
 void PrintLokasi(Lokasi l)
