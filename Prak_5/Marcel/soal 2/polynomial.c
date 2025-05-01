@@ -34,6 +34,8 @@
   * dan degree diinisialisasikan dengan index tertinggi dari elemen coeffArray yang tidak nol
   */
  {  
+    CreatePolynomial(p);
+
     if (size != 0){
         for (int i = 0; i<size; i++){
             p->coeff[i] = coeffArray[i];
@@ -76,7 +78,7 @@
  {
     int val = 0;
     for (int i = 0; i <= p->degree; i++){
-        val += p->coeff[i]*pow(x,i);
+        val += p->coeff[i]*intPow(x,i);
     }
     return val;
  }
@@ -208,44 +210,52 @@
   * - Berikan newline (\n) di akhir baris
   * Contoh: -4x^3 + 3x^2 - 2x + 1
   */
-{
-    for (int i = p->degree; i >= 0; i--){
-        if (p->coeff[i] != 0){
-            if (i == p->degree){
-                if (p->coeff[i] == 1) printf("x^%d", i);
-                else printf("%dx^%d", p->coeff[i], i);
-            }else if (i != p->degree){
-                if (i != 0 && i != 1){
-                    if (p->coeff[i] < 0 && p->coeff[i] != -1){
-                        printf(" - %dx^%d", abs(p->coeff[i]), i);
-                    }else if (p->coeff[i] > 0 && p->coeff[i] != 1){
-                        printf(" + %dx^%d", p->coeff[i], i);
-                    }else if (p->coeff[i] == 1){
-                        printf(" + x^%d", i);
-                    }else if (p->coeff[i] == -1){
-                        printf(" - x^%d", i);
-                    }
-                }else if (i == 1){
-                    if (p->coeff[i] < 0 && p->coeff[i] != -1){
-                        printf(" - %dx", abs(p->coeff[i]), i);
-                    }else if (p->coeff[i] > 0 && p->coeff[i] != 1){
-                        printf(" + %dx", p->coeff[i], i);
-                    }else if (p->coeff[i] == 1){
-                        printf(" + x", i);
-                    }else if (p->coeff[i] == -1){
-                        printf(" - x", i);
-                    }
-                }else if (i == 0){
-                    if (p->coeff[i] < 0){
-                        printf(" - %d", abs(p->coeff[0]));
-                    }else{
-                        printf(" + %d", p->coeff[0]);
+{   
+    int allzero_coeff = 1;
+    for (int i = 0; i <= p->degree; i++){
+        if (p->coeff[i] != 0) allzero_coeff = 0;
+    }
+    if (allzero_coeff) printf("\n");
+    else
+    {
+        for (int i = p->degree; i >= 0; i--){
+            if (p->coeff[i] != 0){
+                if (i == p->degree){
+                    if (p->coeff[i] == 1) printf("x^%d", i);
+                    else printf("%dx^%d", p->coeff[i], i);
+                }else if (i != p->degree){
+                    if (i != 0 && i != 1){
+                        if (p->coeff[i] < 0 && p->coeff[i] != -1){
+                            printf(" - %dx^%d", abs(p->coeff[i]), i);
+                        }else if (p->coeff[i] > 0 && p->coeff[i] != 1){
+                            printf(" + %dx^%d", p->coeff[i], i);
+                        }else if (p->coeff[i] == 1){
+                            printf(" + x^%d", i);
+                        }else if (p->coeff[i] == -1){
+                            printf(" - x^%d", i);
+                        }
+                    }else if (i == 1){
+                        if (p->coeff[i] < 0 && p->coeff[i] != -1){
+                            printf(" - %dx", abs(p->coeff[i]), i);
+                        }else if (p->coeff[i] > 0 && p->coeff[i] != 1){
+                            printf(" + %dx", p->coeff[i], i);
+                        }else if (p->coeff[i] == 1){
+                            printf(" + x", i);
+                        }else if (p->coeff[i] == -1){
+                            printf(" - x", i);
+                        }
+                    }else if (i == 0){
+                        if (p->coeff[i] < 0){
+                            printf(" - %d", abs(p->coeff[0]));
+                        }else{
+                            printf(" + %d", p->coeff[0]);
+                        }
                     }
                 }
             }
         }
+        printf("\n");
     }
-    printf("\n");
 }
 
 // int main(){
