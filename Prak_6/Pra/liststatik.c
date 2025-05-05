@@ -59,7 +59,7 @@ IdxType getFirstIdx(ListStatik l)
 {
    int i = 0;
    while(l.contents[i] == MARK && i < CAPACITY){
-      i++;
+      i += 1;
    }  
    return i;
 }
@@ -70,7 +70,7 @@ IdxType getLastIdx(ListStatik l)
 {
    int i = CAPACITY-1;
    while(l.contents[i] == MARK && i >= 0){
-      i--;
+      i -= 1;
    }  
    return i;
 }
