@@ -23,7 +23,7 @@ void reverse (List *l, int kiri, int kanan){
     // for (int i = 0; i < l->nEff; i++) printf("%d ", l->contents[i]);
     // printf("\n");
 }
-void copyList(List l1, List *l2){
+void cpyList(List l1, List *l2){
     l2->nEff = l1.nEff;
     for(int i = 0; i < l1.nEff; i++){
         l2->contents[i] = l1.contents[i];
@@ -59,16 +59,16 @@ int main(){
     if (sorted){
         printf("YA\n");
     }else if(!sorted){
-        copyList(l, &templ);
+        cpyList(l, &templ);
         while (!sorted && kiri <= l.nEff - 2){
             while(!sorted && kanan <= l.nEff -1){
 
-                copyList(l, &templ);
+                cpyList(l, &templ);
                 reverse(&templ, kiri, kanan);
                 sorted = isSorted(templ);
                 kanan++;
             }
-            copyList(l, &templ);
+            cpyList(l, &templ);
             reverse(&templ, kiri, kanan);
             sorted = isSorted(templ);
             kiri++;

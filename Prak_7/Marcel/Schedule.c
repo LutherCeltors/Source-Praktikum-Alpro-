@@ -10,12 +10,12 @@ typedef struct {
    ElType contents[CAPACITY];
 } ListStatik;
 
-void CreateListStatik(ListStatik *l)
+void CreateListStat(ListStatik *l)
 {
    for (int i = 0; i<CAPACITY; i++) l->contents[i] = MARK;
 }
 
-int listLength(ListStatik l)
+int listLth(ListStatik l)
 {
    int length = 0;
    int i = 0;
@@ -26,36 +26,36 @@ int listLength(ListStatik l)
    return length;
 }
 
-IdxType getLastIdx(ListStatik l)
+IdxType getLstIdx(ListStatik l)
 {
-   int i = listLength(l) - 1;
+   int i = listLth(l) - 1;
    return i;
 }
 
-void insertFirst(ListStatik *l, ElType val)
+void instFirst(ListStatik *l, ElType val)
 {
-   for (int i = getLastIdx(*l); i >= 0; i--){
+   for (int i = getLstIdx(*l); i >= 0; i--){
       l->contents[i + 1] = l->contents[i]; 
    }
    l->contents[0] = val;
 }
-void insertAt(ListStatik *l, ElType val, IdxType idx)
+void instAt(ListStatik *l, ElType val, IdxType idx)
 {
-   for(int i = getLastIdx(*(l)); i >= idx; i--){
+   for(int i = getLstIdx(*(l)); i >= idx; i--){
       l->contents[i + 1] = l->contents[i];
    }
    l->contents[idx] = val;
 }
-void insertLast(ListStatik *l, ElType val)
+void instLast(ListStatik *l, ElType val)
 {
-   l->contents[listLength(*l)] = val;
+   l->contents[listLth(*l)] = val;
 }
-void Printlist(ListStatik *l)
+void prtList(ListStatik *l)
 {   
     printf("[");
-    for (int i =0; i < listLength(*l); i++){
+    for (int i =0; i < listLth(*l); i++){
         printf("%d", l->contents[i]);
-        if (i < listLength(*l) -1){
+        if (i < listLth(*l) -1){
             printf(",");
         }
     }
@@ -67,33 +67,33 @@ int main(){
     int N;
     ListStatik l, sorted;
 
-    CreateListStatik(&l);
-    CreateListStatik(&sorted);
+    CreateListStat(&l);
+    CreateListStat(&sorted);
     scanf("%d", &N);
     for (int i = 0; i < N; i++)scanf("%d", &l.contents[i]); 
     
     sorted.contents[0] = l.contents[0];
-    // printf("%d list length\n",listLength(sorted));
-    Printlist(&sorted);
+    // printf("%d list length\n",listLth(sorted));
+    prtList(&sorted);
 
     for (int i = 0; i < N; i++){
-        for (int j = 0; j < listLength(sorted); j++){
+        for (int j = 0; j < listLth(sorted); j++){
             if (sorted.contents[j] >= l.contents[i] && j != 0){
-                insertAt(&sorted, l.contents[i], j-1);
-                Printlist(&sorted);
+                instAt(&sorted, l.contents[i], j-1);
+                prtList(&sorted);
                 break;
 
             }else if (sorted.contents[j] > l.contents[i] && j == 0){
-                insertFirst(&sorted, l.contents[i]);
-                Printlist(&sorted);
+                instFirst(&sorted, l.contents[i]);
+                prtList(&sorted);
                 break;
 
-            }else if(sorted.contents[j] < l.contents[i] && j == listLength(sorted) - 1){
-                insertLast(&sorted, l.contents[i]);
-                Printlist(&sorted);
+            }else if(sorted.contents[j] < l.contents[i] && j == listLth(sorted) - 1){
+                instLast(&sorted, l.contents[i]);
+                prtList(&sorted);
                 break;
             }
         }
     }
-    // Printlist(&sorted);
+    // prtList(&sorted);
 }

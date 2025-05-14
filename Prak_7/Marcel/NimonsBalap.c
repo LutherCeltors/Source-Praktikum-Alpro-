@@ -10,12 +10,12 @@ typedef struct {
    ElType contents[CAPACITY];
 } ListStatik;
 
-void CreateListStatik(ListStatik *l)
+void CreateListStat(ListStatik *l)
 {
    for (int i = 0; i<CAPACITY; i++) l->contents[i] = MARK;
 }
 
-int listLength(ListStatik l)
+int listLth(ListStatik l)
 {
    int length = 0;
    int i = 0;
@@ -26,18 +26,12 @@ int listLength(ListStatik l)
    return length;
 }
 
-IdxType getLastIdx(ListStatik l)
-{
-   int i = listLength(l) - 1;
-   return i;
-}
-
 void extremeValues(ListStatik l, ElType *max, ElType *min)
 {
    *max = l.contents[0];
    *min = l.contents[1];
 
-   for (int i = 0; i < 0 + listLength(l); i++){
+   for (int i = 0; i < 0 + listLth(l); i++){
       if (*max < l.contents[i]){
          *max = l.contents[i];
       }else if(*min > l.contents[i]){
@@ -45,16 +39,16 @@ void extremeValues(ListStatik l, ElType *max, ElType *min)
       }
    }
 }
-void insertLast(ListStatik *l, ElType val)
+void instLast(ListStatik *l, ElType val)
 {
-   l->contents[listLength(*l)] = val;
+   l->contents[listLth(*l)] = val;
 }
-void Printlist(ListStatik *l)
+void prtList(ListStatik *l)
 {   
     printf("[");
-    for (int i =0; i < listLength(*l); i++){
+    for (int i =0; i < listLth(*l); i++){
         printf("%d", l->contents[i]);
-        if (i < listLength(*l) -1){
+        if (i < listLth(*l) -1){
             printf(",");
         }
     }
@@ -68,16 +62,16 @@ int main(){
     int idxl, idxtw, idxres, tmpi;
     ListStatik l, twipe, result;
     
-    CreateListStatik(&l);
-    CreateListStatik(&twipe);
-    CreateListStatik(&result);
+    CreateListStat(&l);
+    CreateListStat(&twipe);
+    CreateListStat(&result);
 
     scanf("%d", &N);
     for (int i = 0; i < N; i++) scanf("%d", &l.contents[i]);
     scanf("%d", &K);
 
     idxl = 0;
-    while(idxl <= listLength(l) - K){
+    while(idxl <= listLth(l) - K){
         tmpi = idxl;
         idxtw = 0;
         while(idxtw < K){
@@ -87,11 +81,11 @@ int main(){
             // printf("c1\n");
         }
         extremeValues(twipe, &max, &min);
-        insertLast(&result, max);
+        instLast(&result, max);
         idxl++;
-        // Printlist(&twipe);
-        // Printlist(&result);
+        // prtList(&twipe);
+        // prtList(&result);
         // printf("c2\n");
     }
-    Printlist(&result);
+    prtList(&result);
 }
