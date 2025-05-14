@@ -1,33 +1,4 @@
 #include "liststatik.h"
-//*
-/*  Kamus Umum */
-// #define CAPACITY 100
-/* Kapasitas penyimpanan */
-// #define IDX_MIN 0
-/* Indeks minimum list */
-// #define IDX_UNDEF -1
-/* Indeks tak terdefinisi*/
-// #define MARK -9999
-/* Nilai elemen tak terdefinisi*/
-
-/* Definisi elemen dan koleksi objek */
-// typedef int ElType;  /* type elemen List */
-// typedef int IdxType;
-// typedef struct {
-//    ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
-// } ListStatik;
-/* Indeks yang digunakan [0..CAPACITY-1] */
-/* Jika l adalah ListStatik, cara deklarasi dan akses: */
-/* Deklarasi : l : ListStatik */
-/* Maka cara akses: 
-   ELMT(l,i) untuk mengakses elemen ke-i */
-/* Definisi : 
-   List kosong: semua elemen bernilai MARK
-   Definisi elemen pertama: ELMT(l,i) dengan i=0 */
-
-/* ********** SELEKTOR ********** */
-// #define ELMT(l, i) (l).contents[(i)]
-
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
 void CreateListStatik(ListStatik *l)

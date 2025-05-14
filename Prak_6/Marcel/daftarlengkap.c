@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "liststatik.h"
+#include "Boolean.h"
 
 typedef struct {
     int contents[100];
@@ -24,18 +26,23 @@ int main(){
     a.nEff = 0;
     b.nEff = 0;
     scanf("%d", &Na);
-    for (int i = 0; i < Na; i++){
-        scanf("%d", &a.contents[i]);
-        a.nEff += 1;
+    if (Na != 0){
+        for (int i = 0; i < Na; i++){
+            scanf("%d", &a.contents[i]);
+            a.nEff += 1;
+        }
     }
-    Printlist(&a);
+    
+    // Printlist(&a);
     
     scanf("%d", &Mb);
-    for (int i = 0; i < Mb; i++){
-        scanf("%d", &b.contents[i]);
-        b.nEff += 1;
+    if (Mb != 0){
+        for (int i = 0; i < Mb; i++){
+            scanf("%d", &b.contents[i]);
+            b.nEff += 1;
+        }
     }
-    Printlist(&b);
+    // Printlist(&b);
 
     int i = 0;
     int idxa = 0 ;

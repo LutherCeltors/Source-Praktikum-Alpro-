@@ -19,10 +19,10 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElType;  /* type elemen List */
+typedef int ElType; 
 typedef int IdxType;
 typedef struct {
-   ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+   ElType contents[CAPACITY];
 } ListStatik;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListStatik, cara deklarasi dan akses: */
