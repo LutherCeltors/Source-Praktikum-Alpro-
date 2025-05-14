@@ -45,6 +45,7 @@ int isSorted (List l){
 
 int main(){
     int N, kiri, kanan, sorted;
+    int s_kanan, s_kiri;
     List l, templ;
 
     scanf("%d", &N);
@@ -66,23 +67,20 @@ int main(){
                 cpyList(l, &templ);
                 reverse(&templ, kiri, kanan);
                 sorted = isSorted(templ);
+                s_kanan = kanan;
                 kanan++;
             }
             cpyList(l, &templ);
-            reverse(&templ, kiri, kanan);
-            sorted = isSorted(templ);
+            kanan = kiri + 1;
+            // reverse(&templ, kiri, kanan);
+            // sorted = isSorted(templ);
+            // s_kiri = kiri;
+            s_kiri = kiri;
             kiri++;
         }
         if (sorted){
             printf("YA\n");
-            if (kanan == l.nEff){
-                kanan--;
-            }
-            if (kiri == l.nEff -1){
-                kiri--;
-            }
-            
-            printf("%d %d\n", kiri, kanan);
+            printf("%d %d\n", s_kiri, s_kanan);
 
         }else if(!sorted){
             printf("TIDAK\n");

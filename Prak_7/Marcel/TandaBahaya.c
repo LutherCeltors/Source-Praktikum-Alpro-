@@ -2,53 +2,42 @@
 
 int main () {
     int N, a, b, c;
-    int idxa, idxb, idxc;
     int repeat;
     int arr[100];
 
     scanf("%d", &N);
     for (int i = 0; i < N; i++) scanf("%d", &arr[i]);
     
-    repeat = 1;
-    
-    idxa = 0;
-    idxb = 1;
-    idxc = 2;
-
-    while (idxa <= N-3 && repeat){
-        while (idxb <= N-2 && repeat){
-            while (idxc <= N-1 && repeat){
-                a = arr[idxa];
-                b = arr[idxb];
-                c = arr[idxc];
-                // printf("c1\n");
-                if (a < c && c < b) {
-                    repeat = 0;
-                }
-                idxc += 1;
-            }
-            a = arr[idxa];
-            b = arr[idxb];
-            c = arr[idxc];
-            // printf("c2\n");
-            if (a < c && c < b) {
-                repeat = 0;
-            }
-            idxb += 1;
-        }
-        a = arr[idxa];
-        b = arr[idxb];
-        c = arr[idxc];
-        // printf("c3\n");
-        if (a < c && c < b) {
-            repeat = 0;
-        }
-        idxa += 1;
-    }
-
-    if (!(a < c && c < b) && repeat) {
+    if (N < 3){
         printf("Santai\n");
     }else{
-        printf("Nyalakan\n");
-    }
+        repeat = 1;
+
+        for (int i = 0; i < N - 2 && repeat; i++) {
+            for (int j = i + 1; j < N - 1 && repeat; j++) {
+                for (int k = j + 1; k < N && repeat; k++) {
+                    if (arr[i] < arr[k] && arr[k] < arr[j]) {
+                        repeat = 1;
+                    }
+                }
+            }
+        }
+
+        if (!repeat) {
+            for (int i = 0; i < N - 2; i++){
+                a = arr[i];
+                b = arr[i + 1];
+                c = arr[i + 2];
+                if (a < c && c < b){
+                    repeat = 0;
+                }
+            }if (!repeat){
+                printf("Santai\n");
+            }else{
+                printf("Nyalakan\n");
+            }
+        }else{
+            printf("Nyalakan\n");
+        }
+    }    
 }

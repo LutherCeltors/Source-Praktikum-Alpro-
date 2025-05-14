@@ -64,7 +64,7 @@ void prtList(ListStatik *l)
 }
 
 int main(){
-    int N;
+    int N, jump;
     ListStatik l, sorted;
 
     CreateListStat(&l);
@@ -75,20 +75,20 @@ int main(){
     sorted.contents[0] = l.contents[0];
     // printf("%d list length\n",listLth(sorted));
     prtList(&sorted);
-
     for (int i = 0; i < N; i++){
-        for (int j = 0; j < listLth(sorted); j++){
-            if (sorted.contents[j] >= l.contents[i] && j != 0){
-                instAt(&sorted, l.contents[i], j-1);
+        jump  = 1;
+        for (int j = 0; j < listLth(sorted) && jump; j++){
+            if (sorted.contents[j] >= l.contents[i] && jump && j != 0){
+                instAt(&sorted, l.contents[i], j);
                 prtList(&sorted);
-                break;
+                jump = 0;
 
-            }else if (sorted.contents[j] > l.contents[i] && j == 0){
+            }else if (sorted.contents[j] > l.contents[i] && jump && j == 0){
                 instFirst(&sorted, l.contents[i]);
                 prtList(&sorted);
                 break;
 
-            }else if(sorted.contents[j] < l.contents[i] && j == listLth(sorted) - 1){
+            }else if(sorted.contents[j] < l.contents[i] && jump && j == listLth(sorted) - 1){
                 instLast(&sorted, l.contents[i]);
                 prtList(&sorted);
                 break;
