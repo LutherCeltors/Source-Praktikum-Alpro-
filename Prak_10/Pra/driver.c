@@ -7,7 +7,7 @@ int main(){
    CreateList(&l1);  
    CreateList(&l2);  
    ElType val, out, out1;
-   for (int i = 0; i < 3; i++){
+   for (int i = 0; i < 20; i++){
        scanf("%d",&val);
        insertFirst(&l, val);
    }
@@ -35,6 +35,8 @@ int main(){
    }
    displayList(l2);
    printf("\n");
+   insertAt(&l2, 35, length(l2));
+   displayList(l2);printf("\n");
    deleteAt(&l2, 3, &out1);
    displayList(l2);
    printf("%d\n", out1);
